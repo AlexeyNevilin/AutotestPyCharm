@@ -1,0 +1,10 @@
+a = 'ATTCGGAGCT'
+print(a)
+print(a[1])
+print(a[1:4])
+print(a[:4])
+print(a[4:])
+print(a[-4:])
+print(a[1:-1])
+print(a[1:-1:2])
+print(a[::-1])
