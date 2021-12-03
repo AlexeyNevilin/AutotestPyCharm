@@ -51,3 +51,4 @@ def charactersCount(text):
     list_word = text.split(' ')
     statistics = {s: list_word.count(s) for s in list_word if s}
     return statistics
+fmghkjnfdgklhjm
