@@ -16,9 +16,9 @@ def palindrome(number): #Пример для ввода: palindrome(48984)
 
 
 #Вывести список простых чисел до 1000.
-def prime_number(): #Пример для ввода: prime_number()
+def prime_number(numb): #Пример для ввода: prime_number(50)
     list_numb = []
-    for i in range(2, 1001):
+    for i in range(2, numb + 1):
         for s in range(2, i):
             if i % s == 0:
                 break
@@ -31,7 +31,7 @@ def prime_number(): #Пример для ввода: prime_number()
 #Билеты начинаются с 000000 и заканчиваются 999999.
 #Счастливым считается билет, если сумма первых трех значений, равна сумме вторых трёх
 ''' ticket() '''
-def ticket():
+def ticket(): #Пример для ввода: ticket()
     quantity = 0
     for i in range(1000000):
         i = str(i).zfill(6)
@@ -42,7 +42,7 @@ def ticket():
 
 # Напишите функцию. На вход подается строка (текст), на выходе должен быть словарь, где ключ – это слово, а значение – число:
 # сколько раз данное слово повторилось в тексте (регистр не имеет значения)
-''' charactersCount('Мело, мело по всей земле Во все пределы. Свеча горела на столе, Свеча горела. Метель лепила на стекле Кружки и стрелы. Свеча горела на столе, Свеча горела') '''
+'''charactersCount('Мело, мело по всей земле Во все пределы. Свеча горела на столе, Свеча горела. Метель лепила на стекле Кружки и стрелы. Свеча горела на столе, Свеча горела')'''
 def charactersCount(text):
     text = text.title().replace('\n', ' ')
     sings = [',', '.']
@@ -51,4 +51,3 @@ def charactersCount(text):
     list_word = text.split(' ')
     statistics = {s: list_word.count(s) for s in list_word if s}
     return statistics
-fmghkjnfdgklhjm
