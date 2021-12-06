@@ -1,26 +1,12 @@
 #Используя модуль datetime, написать функцию change_month,
 #которая к переданной дате прибавляет/вычитает переданное кол-во месяцев.
-from datetime import datetime
-def change_month(my_date, my_month): #change_month('21.06.17', -5)
+
+from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
+def change_month(my_date, my_month): #Пример ввода: change_month('21.06.17', -5)
     my_date = datetime.strptime(my_date, '%d.%m.%y').date()
-    if my_month > 0:
-        new_date = (
-            str(my_date.day).zfill(2)
-            + '.' +
-            (str(my_date.month + my_month) if (my_date.month + my_month) <= 12 else str((my_date.month + my_month) % 12)).zfill(2)
-            + '.' +
-            (str(my_date.year + 0) if (my_month + my_date.month) <= 12 else str(my_date.year + ((my_date.month + my_month) // 12)))
-        )
-        print(new_date)
-    else:
-        new_date = (
-            str(my_date.day).zfill(2)
-            + '.' +
-            (str(my_date.month + my_month) if (my_date.month + my_month) > 0 else str((my_date.month + my_month) // 12)).zfill(2)
-            + '.' +
-            (str(my_date.year + 0) if (my_date.month + my_month) > 0 else str(my_date.year + ((my_date.month + my_month) // 12)))
-        )
-        print(new_date)
+    change_date = my_date + relativedelta(months=+my_month)
+    print(change_date.strftime('%d.%m.%y'))
 
 
 #Напишите декоратор func_time,
@@ -37,7 +23,7 @@ def simple_decor(func):
     return func_time
 
 @simple_decor
-def ticket(): #ticket()
+def ticket(): #Пример ввода: ticket()
     quantity = 0
     for i in range(1000000):
         i = str(i).zfill(6)
@@ -73,7 +59,7 @@ class Name:
         print(f_ini)
 
     @staticmethod
-    def strfname(format): #Пример ввода: Name.strfname('%и. %о. %Ф')
+    def strfname(format): #Пример ввода: Name.strfname('%Ф %и.%о.')
         """Преобразует по переданному формату format строку"""
         my_fio = 'Неволин Алексей Павлович'
         surname, name, patronymic = my_fio.split(' ')
