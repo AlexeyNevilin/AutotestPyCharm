@@ -5,28 +5,26 @@ from datetime import datetime
 def change_month(my_date, my_month):
     my_date = datetime.strptime(my_date, '%d.%m.%y').date()
     change_date_day = my_date.day
-    change_date_month = (my_date.month + my_month) % 12
+    if (my_date.month + my_month) % 12 == 0:
+        change_date_month = 12
+    else:
+        change_date_month = (my_date.month + my_month) % 12
     change_date_year = my_date.year
     year_numb = my_date.month + my_month
     if year_numb > 12:
         while year_numb > 12:
-            year_numb - 12
-            print(year_numb, '1')
-            #change_date_year = my_date.year + 1
-        #change_date_year = change_date_year
+            year_numb -= 12
+            change_date_year += 1
     elif year_numb <= 0:
         while year_numb <= 0:
-            year_numb + 12
-            print(year_numb, '2')
-            #change_date_year = my_date.year - 1
-        #change_date_year = change_date_year
+            year_numb += 12
+            change_date_year -= 1
     else:
         change_date_year = my_date.year
-        print(year_numb, '3')
-    print(year_numb, '4')
-    print(change_date_day)
-    print(change_date_month)
-    print(change_date_year)
+    print(str(change_date_day).zfill(2) + '.' + str(change_date_month).zfill(2) + '.' + str(change_date_year).zfill(2))
+
+
+
 
 
     '''my_month2 = (my_date.month + my_month) / 12
