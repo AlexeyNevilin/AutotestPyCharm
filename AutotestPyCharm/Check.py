@@ -1,35 +1,41 @@
 # change_month(datetime.datetime(2005, 6, 15), 6) change_month(datetime.date(2005, 6, 15), 5)
 from datetime import datetime
+from datetime import timedelta
 
-#change_month('21.06.17', -5)
-def change_month(my_date, my_month):
-    my_date = datetime.strptime(my_date, '%d.%m.%y').date()
-    change_date_day = my_date.day
-    if (my_date.month + my_month) % 12 == 0:
-        change_date_month = 12
+# change_month('21.06.17', -5)
+def change_month(input_date, input_month):
+    input_date = datetime.strptime(input_date, '%d.%m.%y').date()
+    if (input_date.month + input_month) % 12 == 0:
+        modified_month = 12
     else:
-        change_date_month = (my_date.month + my_month) % 12
-    change_date_year = my_date.year
-    year_numb = my_date.month + my_month
-    if year_numb > 12:
-        while year_numb > 12:
-            year_numb -= 12
-            change_date_year += 1
-    elif year_numb <= 0:
-        while year_numb <= 0:
-            year_numb += 12
-            change_date_year -= 1
+        modified_month = (input_date.month + input_month) % 12
+    modified_year = input_date.year
+
+    year = input_date.month + input_month
+    if year > 12:
+        while year > 12:
+            year -= 12
+            modified_year += 1
+    elif year <= 0:
+        while year <= 0:
+            year += 12
+            modified_year -= 1
     else:
-        change_date_year = my_date.year
-    print(str(change_date_day).zfill(2) + '.' + str(change_date_month).zfill(2) + '.' + str(change_date_year).zfill(2))
+        modified_year = input_date.year
 
+    day = str(input_date.day).zfill(2) + '.' + str(modified_month).zfill(2) + '.' + str(modified_year).zfill(2)
+    if 28 <= input_date.day <= 31 and modified_month != 12:
+        max_day = datetime.strptime(('01' + '.' + str(modified_month + 1).zfill(2) + '.' + str(modified_year).zfill(2)), '%d.%m.%Y').date() - timedelta(days=1)
+        max_day = str(max_day.day).zfill(2) + '.' + str(max_day.month).zfill(2) + '.' + str(max_day.year).zfill(2)
+        if day > max_day:
+            max_day = datetime.strptime(max_day, '%d.%m.%Y').date()
+            modified_day = max_day.day
+        else:
+            modified_day = input_date.day
+    else:
+        modified_day = input_date.day
 
+    modified_date = str(modified_day).zfill(2) + '.' + str(modified_month).zfill(2) + '.' + str(modified_year).zfill(2)
+    modified_date = datetime.strptime(modified_date, '%d.%m.%Y').date()
+    print(modified_date)
 
-
-
-    '''my_month2 = (my_date.month + my_month) / 12
-    my_month3 = (my_date.month + my_month) // 12
-    print('my_month', my_month)
-    print('my_month2', my_month2)
-    print('my_month3' ,my_month3)
-    print(my_date_month)'''
