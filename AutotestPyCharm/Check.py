@@ -39,3 +39,4 @@ def change_month(input_date, input_month):
     modified_date = datetime.strptime(modified_date, '%d.%m.%Y').date()
     print(modified_date)
 
+
