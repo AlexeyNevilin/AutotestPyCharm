@@ -11,23 +11,23 @@ def change_month(input_date, input_month):
         modified_month = (input_date.month + input_month) % 12
     modified_year = input_date.year
 
-    year = input_date.month + input_month
-    if year > 12:
-        while year > 12:
-            year -= 12
+    month = input_date.month + input_month
+    if month > 12:
+        while month > 12:
+            month -= 12
             modified_year += 1
-    elif year <= 0:
-        while year <= 0:
-            year += 12
+    elif month <= 0:
+        while month <= 0:
+            month += 12
             modified_year -= 1
     else:
         modified_year = input_date.year
 
-    day = str(input_date.day).zfill(2) + '.' + str(modified_month).zfill(2) + '.' + str(modified_year).zfill(2)
+    modified_year_str = str(input_date.day).zfill(2) + '.' + str(modified_month).zfill(2) + '.' + str(modified_year).zfill(2)
     if 28 <= input_date.day <= 31 and modified_month != 12:
         max_day = datetime.strptime(('01' + '.' + str(modified_month + 1).zfill(2) + '.' + str(modified_year).zfill(2)), '%d.%m.%Y').date() - timedelta(days=1)
         max_day = str(max_day.day).zfill(2) + '.' + str(max_day.month).zfill(2) + '.' + str(max_day.year).zfill(2)
-        if day > max_day:
+        if modified_year_str > max_day:
             max_day = datetime.strptime(max_day, '%d.%m.%Y').date()
             modified_day = max_day.day
         else:
