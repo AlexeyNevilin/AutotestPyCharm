@@ -2,11 +2,10 @@ class Name:
     """Клас ФИО"""
     def __init__(self, fio):
         """Принимает ФИО одной строкой, 2-3 слова"""
-        if 2 <= len(fio.split()) <= 3:
-            self.fio = fio
-            self.fio = self.fio.split()
-        else:
-            print('Введите ФИО состоящее из 2-3 слов')
+        self.fio = fio
+        self.fio = self.fio.split()
+        if len(fio.split()) < 2 or len(fio.split()) > 3:
+            raise ValueError('ФИО должно состоять из 2-3 слов')
 
     def brief_name(self): #Пример ввода: my_name.brief_name()
         """Возвращается Фамилию и имя без отчества"""
@@ -41,4 +40,5 @@ class Name:
 
 my_name = Name('Неволин Алексей Павлович')
 my_name2 = Name('Неволин Алексей')
-my_name3 = Name('Неволин Алексей Павлович Неволин')
+#my_name3 = Name('Неволин')
+#my_name4 = Name('Неволин Алексей Павлович Неволин')

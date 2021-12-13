@@ -1,26 +1,42 @@
 #Используя модуль datetime, написать функцию change_month,
 #которая к переданной дате прибавляет/вычитает переданное кол-во месяцев.
 from datetime import datetime
-def change_month(my_date, my_month): #Пример ввода: change_month('21.06.17', -5)
-    my_date = datetime.strptime(my_date, '%d.%m.%y').date()
-    change_date_day = my_date.day
-    if (my_date.month + my_month) % 12 == 0:
-        change_date_month = 12
+from datetime import timedelta
+def change_month(input_date, input_month): # change_month('21.06.17', -5)
+    date = datetime.strptime(input_date, '%d.%m.%y').date()
+    if (date.month + input_month) % 12 == 0:
+        modified_month = 12
     else:
-        change_date_month = (my_date.month + my_month) % 12
-    change_date_year = my_date.year
-    year_numb = my_date.month + my_month
-    if year_numb > 12:
-        while year_numb > 12:
-            year_numb -= 12
-            change_date_year += 1
-    elif year_numb <= 0:
-        while year_numb <= 0:
-            year_numb += 12
-            change_date_year -= 1
+        modified_month = (date.month + input_month) % 12
+    modified_year = date.year
+
+    month = date.month + input_month
+    if month > 12:
+        while month > 12:
+            month -= 12
+            modified_year += 1
+    elif month <= 0:
+        while month <= 0:
+            month += 12
+            modified_year -= 1
     else:
-        change_date_year = my_date.year
-    print(str(change_date_day).zfill(2) + '.' + str(change_date_month).zfill(2) + '.' + str(change_date_year).zfill(2))
+        modified_year = date.year
+
+    modified_year_str = str(date.day).zfill(2) + '.' + str(modified_month).zfill(2) + '.' + str(modified_year).zfill(2)
+    if 28 <= date.day <= 31 and modified_month != 12:
+        max_day = datetime.strptime(('01' + '.' + str(modified_month + 1).zfill(2) + '.' + str(modified_year).zfill(2)), '%d.%m.%Y').date() - timedelta(days=1)
+        max_day = str(max_day.day).zfill(2) + '.' + str(max_day.month).zfill(2) + '.' + str(max_day.year).zfill(2)
+        if modified_year_str > max_day:
+            max_day = datetime.strptime(max_day, '%d.%m.%Y').date()
+            modified_day = max_day.day
+        else:
+            modified_day = date.day
+    else:
+        modified_day = date.day
+
+    modified_date = str(modified_day).zfill(2) + '.' + str(modified_month).zfill(2) + '.' + str(modified_year).zfill(2)
+    modified_date = datetime.strptime(modified_date, '%d.%m.%Y').date()
+    print(modified_date)
 
 
 #Напишите декоратор func_time,
@@ -51,13 +67,12 @@ def ticket(): #Пример ввода: ticket()
 #состоящей из 2-3 слов (на это должна быть проверка).
 class Name:
     """Клас ФИО"""
-    def __init__(self, fio):
+    def __init__(self, fio): #Пример ввода: my_name3 = Name('Неволин') #my_name4 = Name('Неволин Алексей Павлович Неволин')
         """Принимает ФИО одной строкой, 2-3 слова"""
-        if 2 <= len(fio.split()) <= 3:
-            self.fio = fio
-            self.fio = self.fio.split()
-        else:
-            print('Введите ФИО состоящее из 2-3 слов')
+        self.fio = fio
+        self.fio = self.fio.split()
+        if len(fio.split()) < 2 or len(fio.split()) > 3:
+            raise ValueError('ФИО должно состоять из 2-3 слов')
 
     def brief_name(self): #Пример ввода: my_name.brief_name()
         """Возвращается Фамилию и имя без отчества"""
@@ -92,4 +107,3 @@ class Name:
 
 my_name = Name('Неволин Алексей Павлович')
 my_name2 = Name('Неволин Алексей')
-my_name3 = Name('Неволин Алексей Павлович Неволин')
