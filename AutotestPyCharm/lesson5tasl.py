@@ -19,11 +19,9 @@ link_list = soup.find('div', {'data-for': "ereport25"})
 load_blocks = link_list.find_all('div', {'class': 'sbis_ru-DownloadNew-loadLink'})
 for link in load_blocks:
     download_links = link.find('a').get('href')
-    #download_links_name = link.find('a').text
-    #results.append(download_links_name + ': ' + download_links)
-    results.append(download_links)
-    results.append('\n')
+    download_links_name = link.find('a').text
+    results.append(f'{download_links_name}: {download_links}')
 
-file = open('links.txt', 'w')
-file.writelines(results)
+file = open('links.txt', 'w', encoding="windows-1251")
+file.writelines('\n'.join(results))
 file.close()
