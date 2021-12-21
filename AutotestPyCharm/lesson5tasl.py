@@ -1,3 +1,4 @@
+
 from selenium import webdriver as wd
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
@@ -22,6 +23,6 @@ for link in load_blocks:
     download_links_name = link.find('a').text
     results.append(f'{download_links_name}: {download_links}')
 
-file = open('links.txt', 'w', encoding="windows-1251")
-file.writelines('\n'.join(results))
+file = open('links.txt', mode='w')
+file.write('\n'.join(results))
 file.close()
