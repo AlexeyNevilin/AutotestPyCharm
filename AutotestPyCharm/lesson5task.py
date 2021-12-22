@@ -48,9 +48,10 @@ def volune_catalog():
     volume_file = 0
     volume_file_py = 0
     volume_file_exe = 0
+    path = 'C:\\Users\\lesha\\AppData\\Local\\Programs\\Python\\Python39'
 
     # Ищем по дереву каталога все папки и файлы
-    for root, dirs, files in os.walk('C:\\Users\\lesha\\AppData\\Local\\Programs\\Python\\Python39'):
+    for root, dirs, files in os.walk(path):
 
         # Считает количество всех папок и файлов
         volume_dirs += 1
