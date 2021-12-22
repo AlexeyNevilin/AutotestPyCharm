@@ -7,20 +7,17 @@ volume_file_exe = 0
 
 #Ищем по дереву каталога все папки и файлы
 for root, dirs, files in os.walk(path):
-
     #Считает количество всех папок и файлов
     volume_dirs += 1
     volume_file += len(files)
 
-    #Считаем количество всех файлов с расширение .py
+    #Считаем количество всех файлов с расширение .py и .exe
     for file in files:
         expansion = os.path.splitext(file)[1]
+
         if expansion == '.py':
             volume_file_py += 1
 
-    # Считаем количество всех файлов с расширением .exe
-    for file in files:
-        expansion = os.path.splitext(file)[1]
         if expansion == '.exe':
             volume_file_exe += 1
 
