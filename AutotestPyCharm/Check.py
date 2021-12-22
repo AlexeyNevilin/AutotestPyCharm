@@ -1,12 +1,5 @@
 import os
 
-'''path = 'C:\\Users\\lesha\\AppData\\Local\\Programs\\Python\\Python39'
-volume_dirs = 0
-volume_file = 0
-volume_file_py = 0
-volume_file_exe = 0'''
-
-
 def volune_catalog():
     volume_dirs = 0
     volume_file = 0
@@ -37,6 +30,6 @@ def volune_catalog():
                f'Количество файлов с расширением ".exe": {volume_file_exe}')
 
     # Записываем ссылки в файл
-    file_catalog = open('vol.txt', mode='w')
+    file_catalog = open('volume.txt', mode='w')
     file_catalog.write(results)
     file_catalog.close()
